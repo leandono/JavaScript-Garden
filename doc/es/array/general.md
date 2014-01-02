@@ -1,58 +1,40 @@
-## Iteración de un Array y sus propiedades
+## Iteración y propiedades de un Array
 
-A pesar que los arrays en JavaScript son objetos, no existe un buena razón para
-usarlo en un [`bucle for`](#object.forinloop) para una interación de este. De 
-hecho, hay un número de buenas razones **contra** el uso de `for in` en arrays.
+A pesar de que los arrays, en JavaScript, sean objetos, no existen buenas razones para utilizar el bucle [`for in`](#object.forinloop) al momento de recorrerlos. De hecho, hay un buen número de razones en **contra** de la utilización de `for in` en arrays.
 
-> **Nota:** Los arrays de JavaScript **no** son *arrays asociativos*. JavaScript sólo 
-> tiene [objetos](#object.general) para el mapeo de keys a valores. Y mientras
-> que los arrays asociativos **preservan** el orden, los objetos **no**.
+> **Nota:** Los arrays en JavaScript **no son** *arrays asociativos*. JavaScript sólo posee [objectos](#object.general) para mapear claves con valores. Y mientras que los arrays asociativos **preservan** el orden, los objetos no lo hacen.
 
-Dado que el bucle `for in` enumera todas las propiedades que están en una cadena
-de prototipo y la única manera para excluir estas propiedades es el uso de
-[`hasOwnProperty`](#object.hasownproperty), ya que es **veinte veces** más
-lento que un bucle `for` normal.
+Debido a que el bucle `for in` enumera todas las propiedades que existen en la cadena de prototipos y que la única forma de poder excluir esa propiedades es utilizando [`hasOwnProperty`](#object.hasownproperty), `for in` termina siendo hasta **veinte veces** más lento que un bucle normal `for`.
 
 ### Iteración
 
-Con el fin de obtener el mejor rendimiento cuando se repite la interación de arrays, 
-es lo mejor hacer uso del clásico bucle `for`.
+En orden de obtener el mejor desempeño al momento de iterar arrays, lo recomendable es utilizar el clásico bucle `for`.
 
     var list = [1, 2, 3, 4, 5, ...... 100000000];
     for(var i = 0, l = list.length; i < l; i++) {
         console.log(list[i]);
     }
 
-Hay una captura adicional en el ejemplo anterior, que es el almacenamiento de la
-caché de longitud del array vía `l = list.length`.
+En el ejemplo anterior se puede realizar una pequeña mejora: guardar la longitud del array utilizando `l = list.length`.
 
-Aunque la propiedad `length` es definida en el mismo array, todavía posee una sobrecarga
-para realizar la búsqueda en cada interación del bucle. Y mientras que los últimos 
-motores de JavaScript **pueden** aplicar optimizaciones en este caso, no hay manera 
-de saber si el ćodigo se ejecutará en uno de estos nuevos motores nuevos o no.
+A pesar de que la propiedad `length` se encuentra definida dentro del mismo array, preguntar por su valor en cada iteración representa un costo adicional. Y aunque los motores de JavaScript modernos **puedan** aplicar optimizaciones para estos casos, no existe forma de saber cuando el código será ejecutado por alguno de ellos.
 
-De hecho, dejando de lado el almacenamiento en caché puede resultar que el bucle
-inicie sólo la **mitad de rápido** que con la longitud de la caché.
+De hecho, no guardar la longitud del array en una variable puede resultar que el bucle sea la **mitad de rápido** que haciendolo.
 
 ### La propiedad `length`
 
-Mientras que *getter* de la propiedad `length` simplemente retorne el número de
-elementos son contenidos en un array, el *setter* puede ser usado para 
-**truncar** el array.
+Mientras que el *getter* de la propiedad `length` simplemente devuelve el número de elementos que contiene el array, el *setter* puede ser utilizado para **truncar** al elemento.
 
     var foo = [1, 2, 3, 4, 5, 6];
     foo.length = 3;
     foo; // [1, 2, 3]
 
     foo.length = 6;
-    foo; // [1, 2, 3]
+    foo.push(4);
+    foo; // [1, 2, 3, undefined, undefined, undefined, 4]
 
-La asignación de un menor número de longitud trunca al array, pero incrementando la
-longitud no tiene ningún efecto sobre el array.
+Asignando un valor menor, el array queda truncado, mientras que asignando uno mayor crea un array disperso.
 
-### En conclusión
+### En Conclusión
 
-Para obtener el mejor rendimiento es recomendable siempre usar el bucle `for`
-y alamacenar en caché la propiedad `length`. El uso del bucle `for in` en un array 
-es señal de un código mal escrito propenso a errores y un mal desempeño. 
-
+Para obtener un mejor desempeño, es recomendable siempre utilizar el bucle clásico `for` y guardar en una variable el valor de la propiedad `length` al momento de iterar. La utilización de `for in` es un signo de código poco optimizado, propenso a errores.

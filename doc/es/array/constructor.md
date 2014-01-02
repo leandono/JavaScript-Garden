@@ -1,8 +1,6 @@
-## El constructor `Array`
+## El Constructor `Array`
 
-Desde el constructor `Array` es ambiguo en la forma en que ocupa sus párametros,
-es recomendable siempre el uso de arrays literales - la notación `[]` - 
-cuando se crean nuevos arrays.
+Debido a que el constructor `Array` es ambiguo en la manera con que trata sus parámetros, al momento de crear un nuevo array es altamente recomendable usar la notación literal `[]`:
 
     [1, 2, 3]; // Resultado: [1, 2, 3]
     new Array(1, 2, 3); // Resultado: [1, 2, 3]
@@ -11,25 +9,16 @@ cuando se crean nuevos arrays.
     new Array(3); // Resultado: []
     new Array('3') // Resultado: ['3']
 
-En casos cuando sólo hay un argumento pasado al constructor del `Array`,
-y que el argumento es un `Número`, el contructor devolverá un array *disperso* 
-con la propiedad `length` establecida al valor del argumento. Esto debe señalarse
-que la propiedad `length` **sólo** del nuevo array se establecerá de esa manera, 
-los índices reales de la matriz no se iniciará. 
+En los casos que sólo se pasa un argumento al constructor `Array` y dicho es un valor del tipo `Number`, el constructor devolverá un nuevo array *disperso* con la propiedad `length` seteada con el valor del argumento. Notar que *unicamente* la propiedad `length` del nuevo array será seteada; los indices del array no serán inicializados.
 
     var arr = new Array(3);
     arr[1]; // undefined
-    1 in arr; // falso, el índice no se ha establecido
-
-El comportamiento de poder establecer la longitud de un array inicial sólo es útil
-en algunos casos array, como la repetición de una cadena, en la que se evita el uso 
-del código de `bucle for`.
+    1 in arr; // false, el índice no fue seteado
+    
+Manipular la propiedad length de un array es sólo útil en unos pocos casos, como por ejemplo en la repetición de un string, permitiendo en ese caso evitar la utilización de un bucle.
 
     new Array(count + 1).join(stringToRepeat);
 
-### En conclusión
+### En Conclusión
 
-El uso de un constructor `Array` debe ser devuelto como sea posible. 
-Los literales son definitivamente preferidos. Estos son más cortos y tienen una
-sintaxis más limpia; por lo tanto, también se incrementa la legibilidad del código.
-
+La notación literal es preferible a la utilización del contructor del Array. Dicha notación tiene como beneficios ser más corto, tener una sintaxis más clara y ayuda a mejorar la lectura del código.
