@@ -2,7 +2,7 @@
 
 A pesar de que los arrays, en JavaScript, sean objetos, no existen buenas razones para utilizar el bucle [`for in`](#object.forinloop) al momento de recorrerlos. De hecho, hay un buen número de razones en **contra** de la utilización de `for in` en arrays.
 
-> **Nota:** Los arrays en JavaScript **no son** *arrays asociativos*. JavaScript sólo posee [objectos](#object.general) para mapear claves con valores. Y mientras que los arrays asociativos **preservan** el orden, los objetos no lo hacen.
+> **Nota:** Los arrays en JavaScript **no son** *arrays asociativos*. JavaScript sólo posee [objetos](#object.general) para mapear claves con valores. Y mientras que los arrays asociativos **preservan** el orden, los objetos no lo hacen.
 
 Debido a que el bucle `for in` enumera todas las propiedades que existen en la cadena de prototipos y que la única forma de poder excluir esa propiedades es utilizando [`hasOwnProperty`](#object.hasownproperty), `for in` termina siendo hasta **veinte veces** más lento que un bucle normal `for`.
 
@@ -19,7 +19,7 @@ En el ejemplo anterior se puede realizar una pequeña mejora: guardar la longitu
 
 A pesar de que la propiedad `length` se encuentra definida dentro del mismo array, preguntar por su valor en cada iteración representa un costo adicional. Y aunque los motores de JavaScript modernos **puedan** aplicar optimizaciones para estos casos, no existe forma de saber cuando el código será ejecutado por alguno de ellos.
 
-De hecho, no guardar la longitud del array en una variable puede resultar que el bucle sea la **mitad de rápido** que haciendolo.
+De hecho, no guardar la longitud del array en una variable puede resultar que el bucle sea la **mitad de rápido** que haciéndolo.
 
 ### La propiedad `length`
 
