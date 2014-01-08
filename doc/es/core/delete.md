@@ -1,6 +1,6 @@
 ## El Operador `delete`
 
-Siendo breves, en JavaScript es *imposible* eliminar variables globales, funciones y otros elementos que posean el atributo `DontDelete` activado.
+De manera breve, en JavaScript es *imposible* eliminar variables globales, funciones y otros elementos que posean el atributo `DontDelete` activado.
 
 ### Contexto global y contexto de una función
 

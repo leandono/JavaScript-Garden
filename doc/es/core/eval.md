@@ -36,4 +36,4 @@ La utilización de `eval` puede implicar problemas de seguridad ya que al ejecut
 ### En conclusión
 
 `eval` nunca debe ser usado, cualquier código que haga uso del mismo debe ser cuestionado
-en su funcionamiento, rendimiento y seguridad. En caso que se necesite `eval` para que un código funcione, **no debe utilizar** en primer lugar. El código deberá repensarse de manera tal que no requiera la utilización de `eval`.
+en su funcionamiento, rendimiento y seguridad. En caso que se necesite `eval` para que un código funcione, el mismo **deberá re-pensarse** de manera tal que no requiera la utilización del mismo.
