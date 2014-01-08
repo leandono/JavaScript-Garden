@@ -1,54 +1,43 @@
 ## `undefined` y `null`
 
-JavaScript tiene dos valores distintos para `nothing`, el más útil de estos dos
-es `undefined`.
+JavaScript posee dos valores distintos para determinar cuando algo no existe/es vacío: `null` y `undefined`. Sin embargo éste último el más útil para la mayoría de los casos.
 
-### El valor `undefined`
+### El Valor `undefined`
 
-`undefined` es un tipo de dato con exactamente el mismo valor: `undefined`.
+`undefined` es un *tipo* que posee un solo valor: `undefined`. 
 
-El lenguaje también define una variable global que tiene el valor de `undefined`,
-Esta variable es también llamada `undefined`. Sin embargo, esta variable **no** es una 
-constante, ni es una palabra reservada del lenguaje. Esto significa que el *valor* 
-puede ser sobreescrito fácilmente.
+El lenguaje además define una variable global que posee el valor `undefined`; ésta variable es justamente también llamada `undefined`. Sin embargo dicha variable **no es** una constante ni una palabra reservada. Por lo tanto su *valor* puede ser fácilmente sobre-escrito.
 
-> **Nota ES5:** `undefined` en ECMAScript 5 **ya no es** *modificable* en modo esstricto,
-> pero su nombre todavía puede por ejemplo establecer una función con el nombre
-> `undefined`.
+> **Nota sobre ES5:** En ECMAScript 5 (y en modo estricto), `undefined` **no puede** ser 
+> *sobre-escrito*. Sin embargo puede ser reemplazado, por ejemplo, por una función con 
+> el nombre `undefined`
 
-Algunos ejemplos cuando el valor retorna `undefined`:
+A continuación se detallan algunos ejemplos de cuando el valor `undefined` es devuelto:
 
- - Acceso a la variable global (sin modificar) `undefined`.
- - Retorna implícitamente las funciones que no posean la sentencia `return`.
- - Sentencia `return` que no retorna nada de forma explicíta.
- - Búsquedas de propiedades inexistentes.
- - Párametros de la función que no tienen ningún valor explicíto pasado.
- - Cualquier valor que se estable en `undefined`.
+ - Al acceder a la variable global `undefined` (sin modificar).
+ - Accediendo a una variable declarada *pero aún* no inicializada.
+ - Declaraciones `return` que explícitamente no devuelven nada.
+ - Al buscar propiedades que no existen.
+ - Parámetros de funciones que no poseen ningún valor explícito pasado.
+ - Cualquier cosa que haya sido definida con el valor de `undefined`
+ - Cualquier expresión con el formato `void(expression)`
 
-### Manejar los cambios en el valor deChanges `undefined`
+### Manejando los Cambios en el Valor de `undefined`
 
-Dado que la variable `undefined` sólo tiene una copia del *value* de  
-`undefined`, assigna un nuevo valor que **no** cambie el valor del 
-*tipo* `undefined`.
+Debido a que la variable global `undefined` sólo guarda una copia del *valor* actual de `undefined`, asignar un nuevo valor a ella **no** modifica el valor del *tipo* `undefined`.
 
+Por lo tanto, para poder comparar algo contra el valor de `undefined`, es necesario obtener primero el valor original de `undefined`.
 
-Aún con el fin de comparar con el valor de `undefined` es necesario
-recuperar el valor de `undefined` primero.
-
-Con el fin de proteger una posible sobreescritura en la variable `undefined`,
-una técnica común es agregar un párametro adicional a un 
-[wrapper anónimo](#function.scopes), que consiga ningún párametro que se le pase.
-
+Para ello, una técnica común es añadir un parámetro adicional en una [función anónima](#function.scopes) a la cual no se le pasa ningún valor.
 
     var undefined = 123;
     (function(something, foo, undefined) {
-        // undefined en el ámbito local
-        // ahora hace referencia al valor
+        // en el contexto local, undefined
+        // refiere al valor `undefined`
 
     })('Hello World', 42);
 
-Otra forma de lograrlo un mismo efecto es declarar dentro un
-wrapper.
+Otra manera de obtener el mismo efecto es escribiendo una declaración dentro de la función.
 
     var undefined = 123;
     (function(something, foo) {
@@ -57,18 +46,10 @@ wrapper.
 
     })('Hello World', 42);
 
-La única diferencia, es que está versión es de 4 bytes más que utiliza, y en
-caso se comprima y no hay otra declaración de 'var' dentro del
-wrapper anónimo.
+La única diferencia aquí es que esta versión utiliza 4 bytes más en caso ser minimizado el código y no haya otra declaración `var` dentro de la función.
 
+### Utilización de `null`
 
-### Uso de `null`
+Mientras que, en el contexto de JavaScript, `undefined` es utilizado mayormente en el sentido del tradicional *null*, el actual `null` (en su forma literal y de *tipo*) es tan solo otro tipo de dato.
 
-Mientras que `undefined` en el contexto del lenguaje JavaScript es muy usado
-en el sentido tradicional como *null*, el actual `null` (ambos literal y de un tipo)
-es más o menos que otro tipo de datos.
-
-Es utilizado en algunos detalles internos de JavaScript (como declarar al final de un
-cadena de prototipo estableciendo `Foo.prototype = null`), pero en casi todos los
-casos, puede ser reemplazado por `undefined`.
-
+El mismo es utilizado en algunos casos (por ejemplo, al declarar el final de una cadena de prototipos: `Foo.prototype = null`), pero en la mayoría de los casos puede ser reemplazado por `undefined`.
